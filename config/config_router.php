@@ -60,8 +60,10 @@ class config_router
 
     public function __construct($uri)
     {
+
         if ($uri == '') {
             echo " uri is empty";
+
         } else {
             $this->uri=$uri;
             $uri_parts = explode('?', $uri);
@@ -72,14 +74,19 @@ class config_router
                     if(preg_match('/%/',current($path))){
                         header('Location:'.HEADER);
                     }
-                    $this->controller = 'controller_' . strtolower(current($path));
+
+                    $this->controller = 'controller'.DS.'controller_' . strtolower(current($path));
                     array_shift($path);
+                }else{
+                    header('Location:'.'http://'.$_SERVER['SERVER_NAME'].'/index');
                 }
                 if (current($path)) {
                     $this->action = strtolower(current($path));
                     array_shift($path);
                 }
                 $this->params = $uri_parts[1];
+            }else{
+                header('Location: http://www.example.com/');
             }
         }
 

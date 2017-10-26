@@ -43,14 +43,12 @@ class config_Config
             require_once self::$mapClass[$className] . $className . ".php";
         } else {
 
+
             $path = ROOT . DS . (str_replace('\\', DS, $className)) . ".php";
             if (file_exists($path)) {
                 $this->registerClass($className, $path);
                 include_once($path);
             } else {
-
-//                var_dump('http://'.$_SERVER['SERVER_NAME'].'/404');
-//                var_dump(2);
                 header('Location:'.HEADER);
 
             }

@@ -1,25 +1,25 @@
+<div class="col-lg-4" id="error">Логин или пароль неверный</div>
 <!--<form action="--><?//=SERVER.DS ?><!--check--><?//=DS ?><!--" method="post">-->
-<div id="error">dsfds</div>
-    <p>Введите логин</p>
-    <input type="text" alt="login" name="login" id="login">
-    <p>Введите Пароль</p>
-        <input type="text" alt="pass" name="pass" id="pass">
-    <br>
-<!--    <input type="submit" onclick="enter()" id="enter">-->
-    <button id="enter" style="height: 20px; width: 100px"></button>
-<!--</form>-->
-<script>
 
-    window.onload=function() {
+  <div class="control-group">
 
-        var login = document.getElementById('login');
-        var pass = document.getElementById('pass');
-        var enter = document.getElementById('enter');
-        enter.addEventListener('click', function (e) {
-            if (pass.value == '' || login.value == '') {
-
-            }
-
-        });
-    };
-</script>
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+      <input type="text" id="login" placeholder="Login...">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputPassword">Пароль</label>
+    <div class="controls">
+      <input type="password" id="pass" placeholder="Пароль..." >
+    </div>
+  </div>
+  <div class="control-group" >
+    <div class="controls">
+      <label class="checkbox" style="margin-left: 20px;">
+        <input type="checkbox"> Запомнить меня
+      </label>
+      <button type="submit" class="btn" id="enter">Войти</button>
+    </div>
+  </div>
+<!--    </form>-->

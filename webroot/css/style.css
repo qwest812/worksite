@@ -1,7 +1,11 @@
+
+.my{
+    height: 50px;
+    border: 1px solid green;
+
+}
 #error{
-    /*visibility: hidden;*/
     color: red;
-    width: 200px;
-    height: 20px;
-    border: 1px solid red;
+    visibility: hidden;
+    display: none;
 }
