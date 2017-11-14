@@ -9,17 +9,25 @@
 
 
 namespace controller;
-use config\config_Db;
-use models\models_workWithDb;
+use models\models_index;
+use models\models_login;
+use models\models_public_function;
 
-class controller_index
+
+class controller_index extends models_public_function
 {
     function __construct(){
-        $bdConfig=new config_Db('localhost','office','root','');
+        $modelsLogin=new models_login();
+        $modelIndex= new models_index();
 
-        $bd= models_workWithDb::connect($bdConfig);
-
-        $generator=$bd->select()->setWhatSelect()->setTable('all_office')->prepareRequest();
+        $modelIndex->allOffice();
+//        var_dump($_COOKIE);
+        if($modelsLogin->ifLogin()){
+            $this->header('page');
+        }
+        if($_GET['actions']){
+            $actions=$this->actions($_GET['actions']);
+        }
         include_once('../views/header.php');
             include_once('../views/login.php');
         include_once('../views/footer.php');

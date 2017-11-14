@@ -11,10 +11,9 @@ define('DS', DIRECTORY_SEPARATOR);
 define('ROOT', dirname(dirname(__FILE__)));
 define('HEADER','http://'.$_SERVER['SERVER_NAME'].'/404');
 
-
 include(ROOT.DS.'config'.DS."config_init.php");
 
-$router =new \config\config_router($_SERVER['REQUEST_URI']);
+$router =new \config\config_router();
 
 $classUri=$router->getController();
 $controller=new $classUri();

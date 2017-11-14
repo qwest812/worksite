@@ -9,11 +9,11 @@ namespace config;
 class config_Config
 {
 
-    //массив настроек
+    //РјР°СЃСЃРёРІ РЅР°СЃС‚СЂРѕРµРє
     protected static $settings = array();
-    //путей к классам
+    //РїСѓС‚РµР№ Рє РєР»Р°СЃСЃР°Рј
     protected static $mapClass = array();
-//получение ключа
+//РїРѕР»СѓС‡РµРЅРёРµ РєР»СЋС‡Р°
     public static function get($key)
     {
         return (self::$settings[$key]) ? self::$settings[$key] : null;
@@ -26,7 +26,7 @@ class config_Config
 
 
 
-// регистрация класса
+// СЂРµРіРёСЃС‚СЂР°С†РёСЏ РєР»Р°СЃСЃР°
     public function registerClass($class, $dir)
     {
         if (file_exists($dir)) {

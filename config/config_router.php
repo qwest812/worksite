@@ -58,8 +58,9 @@ class config_router
         return $this->params;
     }
 
-    public function __construct($uri)
+    public function __construct()
     {
+        $uri=$_SERVER['REQUEST_URI'];
 
         if ($uri == '') {
             echo " uri is empty";

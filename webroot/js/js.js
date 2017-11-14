@@ -1,30 +1,23 @@
 
 
     window.onload=function() {
-        var ourRequest = new XMLHttpRequest;
-
-
-
 
         var login = document.getElementById('login');
+
         var pass = document.getElementById('pass');
+
         var eroor = document.getElementById('error');
         var enter = document.getElementById('enter');
-        //var value= eroor.style;
-        console.log(eroor);
         enter.addEventListener('click', function (e) {
-            ourRequest.open("GET", "http://education/hm/newTask/02.08.2017/JSON.json", true);
-                ourRequest.onload = function () {
-                    var ourData = JSON.parse(ourRequest.responseText);
-                    render(ourData);
-                };
-                ourRequest.send();
+            var passValue=pass.value;
+            var loginValue=login.value;
+            console.log(loginValue);
+            console.log(login);
+            console.log(pass);
 
-
-
-            console.log(eroor);
-            if (pass.value == '' || login.value == '') {
-
+            if (passValue == '' || loginValue == '') {
+                console.log('fuck'+loginValue+"fdsfd");
+                console.log();
                 e.preventDefault();
                 eroor.style.visibility='visible';
                 eroor.style.display='block';

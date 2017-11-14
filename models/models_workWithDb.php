@@ -51,7 +51,7 @@ class models_workWithDb
 
         $result = 'WHERE';
         foreach ($array as $key => $value) {
-            $result .= ' ' . '`' . $key . '`' . ' ' . '=' . ' ' . $value . '';
+            $result .= ' ' . '`' . $key . '`' . ' ' . '=' . ' \'' . $value .'\''. '';
         }
         $this->where = $result;
         return $this;
@@ -124,6 +124,7 @@ class models_workWithDb
     function update()
     {
         $this->operator = 'UPDATE';
+        return $this;
     }
 
     /**
@@ -132,7 +133,6 @@ class models_workWithDb
      */
     public function setTable($table)
     {
-
         $this->table = $table;
         return $this;
     }
@@ -160,13 +160,22 @@ class models_workWithDb
         return $this;
     }
 
-    function  prepareRequest()
+    function  prepareRequest($sql=null)
     {
-        $sql = $this->operator . ' ' . $this->whatSelect . ' ' . "FROM" . ' ' . '`' . $this->table . '`' . $this->where;
+        if($this->whatSelect==null){
+
+            $this->setWhatSelect();
+        }
+        if($sql==null){
+            $sql = $this->operator . ' ' . $this->whatSelect . ' ' . "FROM" . ' ' . '`' . $this->table . '`' . $this->where;
+        }
         $this->stmt = $this->pdo->prepare($sql);
         $this->stmt->execute(array());
         while ($row = $this->stmt->fetch(\PDO::FETCH_ASSOC)) {
             yield $row;
+        }
+        if($this->stmt->rowCount()==0){
+            yield false;
         }
 
     }
@@ -181,6 +190,8 @@ class models_workWithDb
     {
         return $this;
     }
+
+
 
 //    function select12($what = '*')
 //    {
