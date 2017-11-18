@@ -15,16 +15,11 @@ class models_workWithDb
 {
     static $pdoConnect;
     protected $operator;
-    //database table
     protected $table;
-    //what are we looking for
     protected $whatSelect;
-    //
     protected $where;
-
     protected $sign;
     protected $stmt;
-    // config connect
     protected $dsn;
     protected $pdo;
 
@@ -169,14 +164,34 @@ class models_workWithDb
         if($sql==null){
             $sql = $this->operator . ' ' . $this->whatSelect . ' ' . "FROM" . ' ' . '`' . $this->table . '`' . $this->where;
         }
+
         $this->stmt = $this->pdo->prepare($sql);
         $this->stmt->execute(array());
+        $this->clean();
         while ($row = $this->stmt->fetch(\PDO::FETCH_ASSOC)) {
             yield $row;
         }
         if($this->stmt->rowCount()==0){
             yield false;
         }
+
+    }
+    function prepareRequestReturn($sql=null){
+        if($this->whatSelect==null){
+
+                    $this->setWhatSelect();
+                }
+                if($sql==null){
+                    $sql = $this->operator . ' ' . $this->whatSelect . ' ' . "FROM" . ' ' . '`' . $this->table . '`' . $this->where;
+                }
+                $this->stmt = $this->pdo->prepare($sql);
+                $this->stmt->execute(array());
+        $array='';
+                while ($row = $this->stmt->fetch(\PDO::FETCH_ASSOC)) {
+                   $array[]=$row;
+                }
+//var_dump($array);
+        return $array;
 
     }
 
@@ -189,6 +204,11 @@ class models_workWithDb
     function condition()
     {
         return $this;
+    }
+    protected function clean(){
+        $this->operator='';
+        $this->whatSelect='';
+        $this->where='';
     }
 
 

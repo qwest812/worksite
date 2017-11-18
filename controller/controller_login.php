@@ -25,8 +25,8 @@ class controller_login extends models_public_function
 
             $this->header('page');
         }
-//        var_dump($_POST);
         if(!empty($_POST['login']) && !empty($_POST['pass'])){
+
             if($this->login($_POST)){
                         $this->header('page');
                     }else{
@@ -44,9 +44,10 @@ class controller_login extends models_public_function
     {
 
         if ($this->model->ifIssetUser($post)) {
-            $this->model->setSession($post);
 
-            if ($post['save']) {
+
+            $this->model->setSession($post);
+            if ($post['save']=='on') {
                         $this->model->setCookie($post);
 
                     }

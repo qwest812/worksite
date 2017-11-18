@@ -11,7 +11,7 @@ namespace models;
 
 use config\config_Db;
 
-class models_generate_json
+class models_generate_json extends models_public_function
 {
     public $bd;
 
@@ -21,15 +21,19 @@ class models_generate_json
         $this->bd = models_workWithDb::connect($bdConfig);
     }
 
-    function generateToJSON($generator)
+    function autocomplete($table,$data)
     {
-        $generator= $this->bd->select()->setWhatSelect()->setTable('user')->prepareRequest();
-        $json = [];
-        foreach ($generator as $value) {
-            $json[] = $value;
+        $like=$this->cleanString($_GET['q']);
+        $sql= "SELECT `$data` FROM `$table` WHERE `$data` LIKE '$like%'";
+        var_dump($sql);
+        $generator= $this->bd->prepareRequestReturn($sql);
+        if($generator==''){
+            echo 'Данных нет';
+        }else{
+            foreach($generator as $value){
+                        echo $value[$data] . "\n";
+                    }
         }
-        $obj =json_encode($json);
-        return $obj;
     }
     function checkKey($params){
         parse_str($params);
@@ -38,8 +42,15 @@ class models_generate_json
         return false;
 
        }
-    function login($login,$pass){
-
-       }
+    function getRequest(){
+        switch ($_GET['request']){
+            case 'login': $this->autocomplete('user','login');
+                break;
+            case 'id': $this->autocomplete('user','id');
+                            break;
+            case 'office':$this->autocomplete('all_office','office_name');
+                break;
+        }
+    }
 
 }

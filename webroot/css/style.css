@@ -9,3 +9,31 @@
     visibility: hidden;
     display: none;
 }
+
+.list1 ol{
+counter-reset: myCounter;
+}
+.list1{
+    width: 25%;
+    float: left;
+}
+.list1 li{
+list-style: none;
+}
+#errLogin{
+    color: red;
+}
+.list1 li:before {
+counter-increment: myCounter;
+content:counter(myCounter);
+color: white;
+background: #22B8F0;
+display: inline-block;
+font-size: 24px;
+font-weight: bold;
+text-align: center;
+margin: 5px 5px;
+line-height: 40px;
+width: 40px;
+height: 40px;
+}

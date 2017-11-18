@@ -55,11 +55,7 @@ class config_Config
 
         }
     }
-    static function clear($string){
 
-        $result= trim(strip_tags($string));
-        return $result;
-    }
 
 }
 

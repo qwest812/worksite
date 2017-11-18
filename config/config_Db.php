@@ -25,13 +25,15 @@ class config_Db
      * @param $pass
      * @param string $charset
      */
-    function __construct($host,$db,$user,$pass,$charset='utf8'){
+//$bdConfig = new config_Db('localhost', 'office', 'root', '');
+    function __construct($host='localhost',$db='office',$user='root',$pass='',$charset='utf8'){
 
         $this->host=$host;
         $this->db=$db;
         $this->user=$user;
         $this->pass=$pass;
         $this->charset=$charset;
+
     }
 
 }

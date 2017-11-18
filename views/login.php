@@ -1,5 +1,5 @@
-<?= $actions ?>
-<div class="col-lg-4" id="error">Заполните все поля</div>
+<div id="errLogin"><?= $actions ?></div>
+<div  id="error">Заполните все поля</div>
 <form action="login" method="post">
 
   <div class="control-group">

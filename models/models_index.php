@@ -18,7 +18,6 @@ class models_index
     {
         $bdConfig = new config_Db('localhost', 'office', 'root', '');
         $this->db = models_workWithDb::connect($bdConfig);
-        $ff = models_workWithDb::connect($bdConfig);
 
     }
 

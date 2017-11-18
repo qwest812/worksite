@@ -9,26 +9,27 @@
 namespace controller;
 
 
-use config\config_router;
 use models\models_generate_json;
+use models\models_login;
+use models\models_public_function;
 
 
-class controller_generate_JSON
+class controller_generate_json extends models_public_function
 {
 
- function __construct(){
-     $modelGenJson=new models_generate_json();
-     $config= new config_router();
-     $result=$modelGenJson->checkKey($config->getParams());
-     if($result){
-         echo 'ggg';
-     }else{
-         echo 'fff';
-     }
+    function __construct()
+    {
+        $modelLogin = new models_login();
+        if ($modelLogin->ifLogin()) {
+            $model_generate = new models_generate_json();
 
+//            $model_generate->autocomplete('user', 'login');
+            $model_generate->getRequest();
+        }else{
+            $this->header('index',array('actions'=>'noLogin'));
+        }
 
-
- }
+    }
 
 
 }

@@ -9,26 +9,35 @@
 namespace controller;
 
 
+use models\models_login;
 use models\models_page;
 use models\models_public_function;
 
 class controller_page extends models_public_function
 {
     protected $model;
+    protected $modelLogin;
  function __construct(){
-//     var_dump($_SESSION);
-//     var_dump($_POST);
 $this->model=new models_page();
      if($_POST['exit']){
-
                  $this->model->logOut();
                  $this->header('index', array('actions'=>'exit'));
              }
-     $this->view();
+     $this->modelLogin=new models_login();
+     if($this->modelLogin->ifLogin()){
+         $this->view();
+     }else{
+         $this->header('index',['actions'=>'noLogin']);
+     }
+
+
  }
     function view(){
-        include_once('../views/header.php');
-                    include_once('../views/moduls/navBar.php');
-                include_once('../views/footer.php');
+        $this->includeViews('header');
+        $this->includeViews('navBar');
+        $this->includeViews('footer');
+//        include_once('../views/header.php');
+//                    include_once('../views/moduls/navBar.php');
+//                include_once('../views/footer.php');
     }
 }

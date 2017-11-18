@@ -35,10 +35,13 @@ class models_login extends models_public_function
         $generator = $this->db->select()->setWhatSelect(array('login', 'key_time'))->setTable('user')->setWhere($array)->prepareRequest();
 
         foreach ($generator as $value) {
-            if ($generator == false) {
+            //var_dump($value);
+            if ($value == false) {
                 return false;
             }
-            if ($value['key'] != $key) {
+            //var_dump($key);
+            //var_dump($value['key_time']);
+            if ($value['key_time'] != $key) {
 
                 return false;
             }
@@ -49,17 +52,18 @@ class models_login extends models_public_function
     function ifIssetUser(array $post)
     {
         if (!empty($post['login']) && !empty($post['pass'])) {
-            $login = trim($post['login']);
-            $pass = trim(md5($post['pass']));
-            $result = $this->ifTruUserAndKey($login, $pass);
+            $login = $this->cleanString($post['login']);
+            $pass = $this->cleanString(md5($post['pass']));
+            $result = $this->ifTruUserAndPass($login, $pass);
             if ($result) {
                 return true;
             }
         }
+
         return false;
     }
 
-    function ifTruUserAndKey($login, $pass)
+    function ifTruUserAndPass($login, $pass)
     {
         if (empty($login) || empty($pass)) {
             return false;
@@ -78,13 +82,33 @@ class models_login extends models_public_function
 
         return true;
     }
+    function ifTruUserAndKey($login, $key)
+        {
+            if (empty($login) || empty($key)) {
+                return false;
+            }
+            $array = ['login' => $login];
+            $generator = $this->db->select()->setWhatSelect(array('login', 'key_time'))->setTable('user')->setWhere($array)->prepareRequest();
+
+            foreach ($generator as $value) {
+                if ($generator == false) {
+                    return false;
+                }
+                if ($value['key_time'] != $key) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
 
     function setSession(array $post)
     {
         $login = $post['login'];
         if ($login) {
-            $_SESSION['login'] = $login;
             $key = $this->genarate_key();
+            $_SESSION['login'] = $login;
+            $_SESSION['key'] = $key;
             $sql = "UPDATE `user` SET `key_time`='$key' WHERE `login`= '$login'";
             $generator = $this->db->prepareRequest($sql);
             foreach ($generator as $value) {
@@ -92,7 +116,7 @@ class models_login extends models_public_function
                     return false;
                 }
             }
-            $_SESSION['key'] = $key;
+
             return true;
         }
 
@@ -104,16 +128,40 @@ class models_login extends models_public_function
         setcookie("key", $post['key'], time() + 3600);
     }
     function ifLogin(){
+
+
             if($this->ifIssetCookie()){
+
                 $login=$_COOKIE['login'];
                 $key=$_COOKIE['key'];
-                if($this->setSession(array('login'=>$login,'key'=>$key))){
-                    return true;
-                }
+                $_SESSION['key']=$key;
+                $_SESSION['login']=$login;
+                return true;
             }
+        if($this->ifIssetSession()){
+            return true;
+        }
+
             return false;
 
         }
+    function ifIssetSession(){
+        $login = $_SESSION['login'];
+               $key = $_SESSION['key'];
+               $array = ['login' => $login];
+               $generator = $this->db->select()->setWhatSelect(array('login', 'key_time'))->setTable('user')->setWhere($array)->prepareRequest();
+
+               foreach ($generator as $value) {
+                   if ($value == false) {
+                       return false;
+                   }
+                   if ($value['key_time'] != $key) {
+
+                       return false;
+                   }
+               }
+               return true;
+    }
 
 
 

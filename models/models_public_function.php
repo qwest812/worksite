@@ -65,5 +65,17 @@ class models_public_function
         }
 
     }
+    function cleanString($string){
+       return trim(strip_tags($string));
+    }
+    function includeViews($fileName, $data=''){
+        $file='../views/'.$fileName.'.php';
+        $filemodul='../views/moduls/'.$fileName.'.php';
+        if(file_exists($file)){
+            include_once($file);
+        }else{
+            include_once($filemodul);
+        }
+    }
 
 }

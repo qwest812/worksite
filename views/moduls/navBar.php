@@ -1,40 +1,41 @@
-<nav class="navbar navbar-default">
+<style>
+  input[name="exit"] {
+    position: relative;
+	    background: none;
+    color: white;
+	    border: 0 none;
+	    cursor: pointer;
+	    outline: none;
+	    vertical-align: top;
+	    padding: 5px;
+	}
+  input[type="submit"] span {
+	    position: relative;
+	    top: 0;
+	    left: 0;
+	    border: 0;
+	}
+</style>
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
-    <!-- Заголовок -->
     <div class="navbar-header">
-      ...
+      <a class="navbar-brand" href="page"><?= $_SERVER['HTTP_HOST']?></a>
     </div>
-    <!-- Основная часть меню (может содержать ссылки, формы и другие элементы) -->
-    <div class="collapse navbar-collapse" id="navbar-main">
-      <!-- Содержимое основной части -->
+    <ul class="nav navbar-nav">
+            <li><a href="page">Главная</a></li>
+              <li><a href="users">Пользователи</a></li>
+              <li><a href="pc">PC</a></li>
+              <li><a href="office">Офисы</a></li>
+              <li><a href="orders">Заказы</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li style="color:white;"><span class="glyphicon glyphicon-user"></span> Здравствуй <?= $_SESSION['login']?>
+        <form action="page" method="post" id="form">
+                                          <input type="submit" value="Выйти" name="exit">
+                                  </form></li>
+      <li><span class="glyphicon glyphicon-log-in"></span>
 
-      <ul class="nav navbar-nav">
-      
-        <!-- Ссылки -->        
-        <li class="active"><a href="#">Ссылка 1</a></li>
-        <li><a href="users">Пользователи</a></li>
-        <li><a href="#">Ссылка 3</a></li>
-        <li><a href="#">Ссылка 4</a></li>
-        <li><a href="#">Ссылка 5</a></li>
-
-        <!-- Выпадающий список -->
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Раздел <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Ссылка</a></li>
-            <li><a href="#">Ссылка</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Ссылка</a></li>
-          </ul>
         </li>
-          <form action="page" method="post">
-              <li>
-                  <input type="submit" value="Exit" name="exit">
-              </li>
-          </form>
-
-      </ul>
-      
-    </div>
+    </ul>
   </div>
 </nav>
