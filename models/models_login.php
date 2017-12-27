@@ -10,6 +10,7 @@ namespace models;
 
 
 use config\config_Db;
+use config\config_router;
 
 class models_login extends models_public_function
 {
@@ -55,12 +56,28 @@ class models_login extends models_public_function
             $login = $this->cleanString($post['login']);
             $pass = $this->cleanString(md5($post['pass']));
             $result = $this->ifTruUserAndPass($login, $pass);
+//            var_dump($result);
             if ($result) {
+
+
                 return true;
             }
         }
 
         return false;
+    }
+    protected function setAccess($user){
+        $access=$this->db->select()->setTable('user')->setWhatSelect(['id_access'])->setWhere(['login'=>$user])->prepareRequestReturn()[0];
+        switch ($access['id_access']){
+            case 0:$_SESSION['access']='user';
+                break;
+            case 1:$_SESSION['access']='hr';
+                break;
+            case 2:$_SESSION['access']='admin';
+                break;
+        }
+//        var_dump($_SESSION);
+//        $_SESSION['access']
     }
 
     function ifTruUserAndPass($login, $pass)
@@ -75,7 +92,10 @@ class models_login extends models_public_function
             if ($generator == false) {
                 return false;
             }
+
             if ($value['pass'] != $pass) {
+//                var_dump($value['pass']);
+//                var_dump($pass);
                 return false;
             }
         }
@@ -131,7 +151,6 @@ class models_login extends models_public_function
 
 
             if($this->ifIssetCookie()){
-
                 $login=$_COOKIE['login'];
                 $key=$_COOKIE['key'];
                 $_SESSION['key']=$key;
@@ -139,10 +158,11 @@ class models_login extends models_public_function
                 return true;
             }
         if($this->ifIssetSession()){
+
             return true;
         }
-
-            return false;
+  if(config_router::$con!='index')
+        $this->header('index',['actions'=>'noLogin']);
 
         }
     function ifIssetSession(){
@@ -160,6 +180,7 @@ class models_login extends models_public_function
                        return false;
                    }
                }
+        $this->setAccess($login);
                return true;
     }
 

@@ -14,7 +14,7 @@ use config\config_router;
 class controller_404
 {
   function __construct(){
-//var_dump($_SERVER['DOCUMENT_ROOT'].DS.'views'.DS.'404.html');
-      include_once($_SERVER['DOCUMENT_ROOT'].DS.'views'.DS.'404.html');
+//var_dump($_SERVER['DOCUMENT_ROOT'].DS.'views'.DS.'404.php');
+      include_once($_SERVER['DOCUMENT_ROOT'].DS.'views'.DS.'404.php');
   }
 }

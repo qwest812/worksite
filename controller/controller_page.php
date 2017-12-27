@@ -26,8 +26,6 @@ $this->model=new models_page();
      $this->modelLogin=new models_login();
      if($this->modelLogin->ifLogin()){
          $this->view();
-     }else{
-         $this->header('index',['actions'=>'noLogin']);
      }
 
 

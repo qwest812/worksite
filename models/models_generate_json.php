@@ -17,23 +17,31 @@ class models_generate_json extends models_public_function
 
     function  __construct()
     {
+        $q=["value"=>"Some Name","id"=>1,"value2"=>"Some Othername","id2"=>2];
+//        echo json_encode(array_keys($_GET));
+//        echo json_encode($_GET);
         $bdConfig = new config_Db('localhost', 'office', 'root', '');
         $this->bd = models_workWithDb::connect($bdConfig);
     }
 
     function autocomplete($table,$data)
     {
-        $like=$this->cleanString($_GET['q']);
+//        echo json_encode($_GET);
+        $like=$this->cleanString($_GET['term']);
+//        echo json_encode([$like]);
         $sql= "SELECT `$data` FROM `$table` WHERE `$data` LIKE '$like%'";
-        var_dump($sql);
+//        var_dump($sql);
         $generator= $this->bd->prepareRequestReturn($sql);
         if($generator==''){
-            echo 'Данных нет';
-        }else{
-            foreach($generator as $value){
-                        echo $value[$data] . "\n";
-                    }
+            echo json_encode(['Данных нет']);
+//            echo 'Данных нет';
+        }else {
+            foreach ($generator as $value) {
+//                echo $value[$data] . "\n";
+                echo json_encode($value);
+            }
         }
+
     }
     function checkKey($params){
         parse_str($params);
@@ -46,7 +54,7 @@ class models_generate_json extends models_public_function
         switch ($_GET['request']){
             case 'login': $this->autocomplete('user','login');
                 break;
-            case 'id': $this->autocomplete('user','id');
+            case 'id': $this->autocomplete('pc','id');
                             break;
             case 'office':$this->autocomplete('all_office','office_name');
                 break;

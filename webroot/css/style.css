@@ -20,7 +20,7 @@ counter-reset: myCounter;
 .list1 li{
 list-style: none;
 }
-#errLogin{
+.error{
     color: red;
 }
 .list1 li:before {
@@ -36,4 +36,42 @@ margin: 5px 5px;
 line-height: 40px;
 width: 40px;
 height: 40px;
+}
+.fifty{
+    width: 50%;
+    float: left;
+}
+
+.pcFound:nth-child(even)
+{
+    color:#F00;
+}
+input[name="exit"] {
+  position: relative;
+   background: none;
+  color: white;
+   border: 0 none;
+   cursor: pointer;
+   outline: none;
+   vertical-align: top;
+   padding: 5px;
+}
+input[type="submit"] span {
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 0;
+}
+#avatar{
+
+    width: 150px;
+    height: 150px;
+
+}
+.center {
+    margin:  0 auto;
+
+}
+.clear{
+    clear: none;
 }

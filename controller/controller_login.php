@@ -15,27 +15,26 @@ use models\models_public_function;
 class controller_login extends models_public_function
 {
     protected $model;
+
     function __construct()
     {
-       $this->model=new models_login();
+        $this->model = new models_login();
 
 
-
-        if($this->model->ifLogin()){
+        if ($this->model->ifLogin()) {
 
             $this->header('page');
         }
-        if(!empty($_POST['login']) && !empty($_POST['pass'])){
+        if (!empty($_POST['login']) && !empty($_POST['pass'])) {
 
-            if($this->login($_POST)){
-                        $this->header('page');
-                    }else{
-                        $this->header('index',array('actions'=>'login'));
-                    }
-        }else{
+            if ($this->login($_POST)) {
+                $this->header('page');
+            } else {
+                $this->header('index', array('actions' => 'login'));
+            }
+        } else {
             $this->header('index');
         }
-
 
 
     }
@@ -47,13 +46,13 @@ class controller_login extends models_public_function
 
 
             $this->model->setSession($post);
-            if ($post['save']=='on') {
-                        $this->model->setCookie($post);
+            if ($post['save'] == 'on') {
+                $this->model->setCookie($post);
 
-                    }
+            }
             return true;
 
-        }else{
+        } else {
             return false;
 
         }

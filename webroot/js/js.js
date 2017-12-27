@@ -5,7 +5,6 @@ window.onload = function () {
     for (var i = 0; i < li.length; i++) {
         var index = (li[i].innerHTML.indexOf(active[3]));
         if (index > 0) {
-            console.log(i);
             li[i].classList += 'active';
         }
     }
@@ -13,40 +12,47 @@ window.onload = function () {
     var f = document.querySelectorAll('a[href="' + active[3] + '"]');
     var login = document.getElementById('login');
     var pass = document.getElementById('pass');
-    var eroor = document.getElementById('error');
+
     var enter = document.getElementById('enter');
-    enter.addEventListener('click', function (e) {
-        var passValue = pass.value;
-        var loginValue = login.value;
-        if (passValue == '' || loginValue == '') {
-            e.preventDefault();
-            var ff=document.getElementById('errLogin');
-            errLogin.style.display='none';
-            eroor.style.visibility = 'visible';
-            eroor.style.display = 'block';
-            pass.value = '';
-            login.value = '';
-        }
+    if (enter) {
+        enter.addEventListener('click', function (e) {
+            var passValue = pass.value;
+            var loginValue = login.value;
+            if (passValue == '' || loginValue == '') {
+                e.preventDefault();
+                visibleError();
+                pass.value = '';
+                login.value = '';
+            }
+        });
 
-    });
+    }
 
+
+    var addUser = document.getElementsByName('addUser');
+    if (addUser[0] != undefined) {
+        addUser[0].addEventListener('click', function (e) {
+            var loginAdd = document.getElementsByName('loginAdd')[0];
+            var idPc = document.getElementsByName('id_pc')[0];
+            var data = document.getElementsByName('birthday')[0];
+            var phone = document.getElementsByName('phone')[0];
+            //var ava = document.getElementsByName('picture')[0];
+            var ava = document.getElementById('ava_download');
+            var kb = document.getElementsByName('urlKB')[0];
+            var kk = document.getElementsByName('urlKK')[0];
+            if (loginAdd.value == '' || idPc.value == '' || data.value == '' || ava.files.length==0 || kb.value == '' || kk.value == '') {
+                e.preventDefault();
+                visibleError();
+            }
+
+        });
+    }
+    function visibleError() {
+        var eroor = document.getElementById('error');
+        eroor.style.visibility = 'visible';
+        eroor.style.display = 'block';
+    }
 
 };
-var ourRequest = new XMLHttpRequest;
-var btn = document.getElementById('btn');
-var animalContainer = document.getElementById("animal-info");
-var click = 0;
-btn.addEventListener("click", function () {
-    ourRequest.open("GET", "http://education/hm/newTask/02.08.2017/JSON.json", true);
-    ourRequest.onload = function () {
-        var ourData = JSON.parse(ourRequest.responseText);
-        render(ourData);
-    };
-    ourRequest.send();
 
-});
-
-/**
- * Created by PC-1 on 08.08.2017.
- */
 

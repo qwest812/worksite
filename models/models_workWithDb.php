@@ -22,6 +22,7 @@ class models_workWithDb
     protected $stmt;
     protected $dsn;
     protected $pdo;
+    protected $id;
 
 
     function __construct($config)
@@ -35,7 +36,7 @@ class models_workWithDb
         try {
             $this->pdo = new \PDO($this->dsn, $config->user, $config->pass);
         } catch (\PDOException $e) {
-            die('Ïîäêëþ÷åíèå íå óäàëîñü: ' . $e->getMessage());
+            die('ÐŸÐ¾Ð´ÐºÐ»ÑŽÑ‡ÐµÐ½Ð¸Ðµ Ð½Ðµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ: ' . $e->getMessage());
         }
 
 
@@ -164,7 +165,7 @@ class models_workWithDb
         if($sql==null){
             $sql = $this->operator . ' ' . $this->whatSelect . ' ' . "FROM" . ' ' . '`' . $this->table . '`' . $this->where;
         }
-
+//var_dump($sql);
         $this->stmt = $this->pdo->prepare($sql);
         $this->stmt->execute(array());
         $this->clean();
@@ -172,7 +173,7 @@ class models_workWithDb
             yield $row;
         }
         if($this->stmt->rowCount()==0){
-            yield false;
+                        yield false;
         }
 
     }
@@ -184,20 +185,20 @@ class models_workWithDb
                 if($sql==null){
                     $sql = $this->operator . ' ' . $this->whatSelect . ' ' . "FROM" . ' ' . '`' . $this->table . '`' . $this->where;
                 }
+//        echo($sql."<br>");
                 $this->stmt = $this->pdo->prepare($sql);
-                $this->stmt->execute(array());
-        $array='';
-                while ($row = $this->stmt->fetch(\PDO::FETCH_ASSOC)) {
-                   $array[]=$row;
+                if($this->stmt->execute(array())){
+                    $this->id=$this->pdo->lastInsertId();
+                    $this->clean();
+                            $array='';
+                                    while ($row = $this->stmt->fetch(\PDO::FETCH_ASSOC)) {
+                                       $array[]=$row;
+                                    }
+                            return $array;
+                }else{
+                    return false;
                 }
-//var_dump($array);
-        return $array;
 
-    }
-
-
-    function execute()
-    {
 
     }
 
@@ -209,10 +210,37 @@ class models_workWithDb
         $this->operator='';
         $this->whatSelect='';
         $this->where='';
+        $this->table='';
     }
+ function lastId(){
+        return $this->id;
+    }
+    function truncateTable($table){
+        $sql='TRUNCATE TABLE `'.$table.'`';
+        $this->prepareRequestReturn($sql);
+    }
+    function lastIdInTabdle($table){
+        $sql='SELECT `id` FROM '.$table.' ORDER BY id DESC LIMIT 1';
+        $result=$this->prepareRequestReturn($sql);
+//        var_dump($result);
+//        var_dump($result['id']);
+        if(is_array($result)){
+            $_SESSION['lastIdInTable']=$result[0]['id'];
+            return $result[0]['id'];
+        }else{
+            $_SESSION['lastIdInTable']='ÐÐµÑ‚ Ð´Ð°Ð½Ð½Ñ‹Ñ…';
+            return false;
+        }
 
-
-
+    }
+    function getID($table,$param,$value){
+            $result=$this->select()->setWhatSelect(['id'])->setTable($table)->setWhere([$param=>$value])->prepareRequestReturn();
+            return $result[0]['id'];
+        }
+    function getInfoById($table,$id){
+        $result=$this->select()->setTable($table)->setWhere(['id'=>$id])->prepareRequestReturn();
+        return $result[0];
+    }
 //    function select12($what = '*')
 //    {
 //        $sql = 'SELECT * name` FROM `all_office` WHERE ?';

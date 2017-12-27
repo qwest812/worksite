@@ -9,6 +9,7 @@ class config_router
     protected $uri;
     protected $route;
     protected $method;
+    static $con='';
 
     /**
      * @return mixed
@@ -75,7 +76,7 @@ class config_router
                     if(preg_match('/%/',current($path))){
                         header('Location:'.HEADER);
                     }
-
+                    self::$con=current($path);
                     $this->controller = 'controller'.DS.'controller_' . strtolower(current($path));
                     array_shift($path);
                 }else{
@@ -87,10 +88,9 @@ class config_router
                 }
                 $this->params = $uri_parts[1];
             }else{
-                header('Location: http://www.example.com/');
+                header('Location:'.'http://'.$_SERVER['SERVER_NAME'].'/index');
             }
         }
-
     }
 
 }

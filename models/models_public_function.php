@@ -57,8 +57,6 @@ class models_public_function
             }
             $string = substr($string, 0, -1);
 
-//                var_dump($page);
-//                var_dump($string);
             header('Location:' . "http://worksite/" . $page . "?" . $string);
         } else {
             header('Location:' . "http://worksite/" . $page);

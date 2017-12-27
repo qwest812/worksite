@@ -25,8 +25,6 @@ class controller_office extends models_public_function
             $allUserbyOffice=$this->getUserByOffice($_GET['office']);
 
             $this->views($allOffice,$allUserbyOffice);
-        }else{
-            $this->header('index',['actions'=>'noLogin']);
         }
     }
     function views($office,$users){

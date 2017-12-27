@@ -20,33 +20,36 @@ class controller_users extends models_public_function
 
     function __construct()
     {
+
         $this->modelsLogin = new models_login();
 
         if ($this->modelsLogin->ifLogin()) {
+            $this->modelsUser=new models_users();
             if ($_POST['search']) {
-                $this->modelsUser=new models_users();
-                $this->modelsUser->getDataUser($_POST);
-            }
-            $this->views();
 
-        } else {
-            $this->header('index', array('actions' => 'noLogin'));
+                $user=$this->modelsUser->getDataUser($_POST);
+//                var_dump($user);
+            }
+
+            if($_POST['addUser']){
+                        $result=$this->modelsUser->addUser($_POST,$_FILES);
+                if($result)
+                    $this->header('users',['add'=>'good']);
+                else
+                    $this->header('users',['add'=>'error']);
+                    }
+          $office=$this->modelsUser->getOffice();
+            $this->views($office,$user);
         }
     }
-
-
-    function views()
+    function views($office,$user)
     {
 
         $this->includeViews('header');
         $this->includeViews('navBar');
-        $this->includeViews('users');
+        $this->includeViews('usersFound',$user);
+        $this->includeViews('usersAdd',$office);
         $this->includeViews('footer');
-
-//        include_once('../views/header.php');
-//        include_once('../views/moduls/navBar.php');
-//        include_once('../views/moduls/users.php');
-//        include_once('../views/footer.php');
 
     }
 }
