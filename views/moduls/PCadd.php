@@ -1,6 +1,6 @@
 <?php
-if ((int)$_GET['id'] > 0) {
-    echo "<div>Компьютер с номером: " . $_GET['id'] . " был добавлен в базу</div>";
+if ((int)$_GET['add_id'] > 0) {
+    echo "<div>Компьютер с номером: " . $_GET['add_id'] . " был добавлен в базу</div>";
 } elseif ($_GET['id'] == 'error') {
     echo "<div>Ошибка добавления</div>";
 }

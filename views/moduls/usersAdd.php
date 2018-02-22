@@ -14,12 +14,12 @@
             <input name="loginAdd" type="text" pattern="^[A-Za-zА-Яа-яЁё]+$" title="Only Letters">
             <div>Office</div>
             <select name="office">
-                <?php
-                foreach ($data as $value) {
-                    echo '<option name="' . $value['office_name'] . '">' . $value['office_name'] . '</option>';
-                }
-                ?>
-            </select>
+                            <?php
+                            foreach ($data as $value) {
+                                echo '<option name="' . $value['office_name'] . '">' . $value['office_name'] . '</option>';
+                            }
+                            ?>
+                        </select>
             <div>Id PC</div>
              <input id="id" type="text" autocomplete="off" style="width: 200px" name="id_pc" pattern="^[0-9]+$" title="Only Number">
             <div>Birthday:</div>

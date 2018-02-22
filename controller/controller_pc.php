@@ -29,14 +29,14 @@ class controller_pc extends models_public_function
                 $result = $this->modelsPC->addPC($_POST);
                 if ($result) {
 
-                    $this->header('pc', ['id' => $result]);
+                    $this->header('pc', ['add_id' => $result]);
                 } else {
                     $this->header('pc', ['id' => 'error']);
                 }
             }
 
-            if ($_POST['search']) {
-                $foundPc = $this->modelsPC->getPC($_POST['id']);
+            if ($_GET['search']) {
+                $foundPc = $this->modelsPC->getPC($_GET['id']);
 
             }
             if ($_POST['save']) {

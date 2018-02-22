@@ -25,9 +25,9 @@ class controller_users extends models_public_function
 
         if ($this->modelsLogin->ifLogin()) {
             $this->modelsUser=new models_users();
-            if ($_POST['search']) {
+            if ($_GET['search']) {
 
-                $user=$this->modelsUser->getDataUser($_POST);
+                $user=$this->modelsUser->getDataUser($_GET);
 //                var_dump($user);
             }
 
@@ -38,6 +38,10 @@ class controller_users extends models_public_function
                 else
                     $this->header('users',['add'=>'error']);
                     }
+
+            if($_POST['updateUser']=='Save'){
+                $this->modelsUser->updateUser($_POST);
+            }
           $office=$this->modelsUser->getOffice();
             $this->views($office,$user);
         }

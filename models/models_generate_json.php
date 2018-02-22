@@ -36,10 +36,14 @@ class models_generate_json extends models_public_function
             echo json_encode(['Данных нет']);
 //            echo 'Данных нет';
         }else {
+            $result=array();
             foreach ($generator as $value) {
 //                echo $value[$data] . "\n";
-                echo json_encode($value);
+//                echo json_encode($value);
+                $result[]=$value['login'];
             }
+//            var_dump($result);
+            echo json_encode($result);
         }
 
     }
@@ -58,7 +62,14 @@ class models_generate_json extends models_public_function
                             break;
             case 'office':$this->autocomplete('all_office','office_name');
                 break;
+            case 'id_pc':$this->returnPc($_GET['id']);
+                break;
         }
+    }
+    function returnPc($id){
+        $result= $this->bd->setTable('pc')->select()->setWhere(['id'=>$id])->prepareRequestReturn();
+//        var_dump($result);
+        echo json_encode($result[0]);
     }
 
 }

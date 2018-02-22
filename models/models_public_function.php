@@ -66,6 +66,12 @@ class models_public_function
     function cleanString($string){
        return trim(strip_tags($string));
     }
+    function cleanArray(array $array){
+        foreach ($array as $key=>$value){
+            $array[$key]=$this->cleanString($value);
+        }
+        return $array;
+    }
     function includeViews($fileName, $data=''){
         $file='../views/'.$fileName.'.php';
         $filemodul='../views/moduls/'.$fileName.'.php';

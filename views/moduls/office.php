@@ -14,7 +14,7 @@
                             <?php
                             if($data['users']!=false){
                                 foreach ($data['users'] as $value) {
-                                                               echo "<li>" . $value['login'] . " </li></a>";
+                                                               echo "<li><a href='users?login=" . $value['login'] . "&search=Поиск'>" . $value['login'] . "</a> </li>";
                                                            }
                             }
 

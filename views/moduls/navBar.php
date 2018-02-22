@@ -10,6 +10,8 @@
             <li><a href="imei"><span class="glyphicon glyphicon-phone"></span> Imei</a></li>
             <li><a href="office"><span class="glyphicon glyphicon-home"></span> Офисы</a></li>
             <li><a href="orders"><span class="glyphicon glyphicon-usd"></span> Заказы</a></li>
+            <li><a href="delivery"><span class="glyphicon glyphicon-ok"></span> Выдача</a></li>
+            <li><a href="equipment"><span class="glyphicon glyphicon-cog"></span> техника</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li style="color:white;"><span class="glyphicon glyphicon-user"></span> Здравствуй <?= $_SESSION['login'] ?>

@@ -186,6 +186,7 @@ class models_workWithDb
                     $sql = $this->operator . ' ' . $this->whatSelect . ' ' . "FROM" . ' ' . '`' . $this->table . '`' . $this->where;
                 }
 //        echo($sql."<br>");
+      //  var_dump($sql);
                 $this->stmt = $this->pdo->prepare($sql);
                 if($this->stmt->execute(array())){
                     $this->id=$this->pdo->lastInsertId();

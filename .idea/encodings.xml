@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/config/config_Config.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/config/config_Db.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/controller/controller_generate_json.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/controller/controller_login.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/controller/controller_office.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/controller/controller_pc.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/models_generate_json.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/models_login.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/models_office.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/models_pc.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/models_public_function.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/models_users.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/models/models_workWithDb.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/footer.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/moduls/navBar.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/moduls/office.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/moduls/pcAdd.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/moduls/pcFound.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/moduls/usersAdd.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/views/moduls/usersFound.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webroot/css/main.css" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>
