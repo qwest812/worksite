@@ -26,11 +26,12 @@ class models_generate_json extends models_public_function
 
     function autocomplete($table,$data)
     {
+
 //        echo json_encode($_GET);
         $like=$this->cleanString($_GET['term']);
 //        echo json_encode([$like]);
         $sql= "SELECT `$data` FROM `$table` WHERE `$data` LIKE '$like%'";
-//        var_dump($sql);
+
         $generator= $this->bd->prepareRequestReturn($sql);
         if($generator==''){
             echo json_encode(['Данных нет']);
@@ -40,7 +41,7 @@ class models_generate_json extends models_public_function
             foreach ($generator as $value) {
 //                echo $value[$data] . "\n";
 //                echo json_encode($value);
-                $result[]=$value['login'];
+                $result[]=$value[$data];
             }
 //            var_dump($result);
             echo json_encode($result);
@@ -55,6 +56,7 @@ class models_generate_json extends models_public_function
 
        }
     function getRequest(){
+
         switch ($_GET['request']){
             case 'login': $this->autocomplete('user','login');
                 break;
